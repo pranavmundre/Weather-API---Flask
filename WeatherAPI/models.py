@@ -37,6 +37,7 @@ class Weather(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     date = db.Column(db.DateTime,)
     _temperature = db.Column(db.String,)
+    weather = db.Column(db.Integer, db.ForeignKey(Location.id))
 
     # @temperature.getter
     # def temperature(self):

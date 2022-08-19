@@ -41,12 +41,18 @@ class LocationTemp(Resource):
 class WeatherAPI(Resource):
     
     def get(self):
-        pass
+        data = Weather.query.all()
+        # data = db.query(Weather).all()
+        return Response((data), 200)
 
     def post(self):
         args = WeatherRequestParser.get_arguments(self)
 
-        weather_data = Weather()
+        weather_data = Weather(
+          date=args.get('date'),
+          temperature=args.get('temperature'),
+          location=args.get('location'),
+        )
         
         db.add(weather_data)   
         db.commit()
