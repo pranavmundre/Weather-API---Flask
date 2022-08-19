@@ -19,31 +19,65 @@ weatherapi = Api(weather_bp)
 class WeatherList(Resource):
 
     def get(self):
+        pass
         
 
     def post(self):
-        
+        pass
 
 
 class WeatherErase(Resource):
 
     def delete(self):
-        
-
-
+        pass
 
     
 class LocationTemp(Resource):
 
     def get(self):
-        
+        pass
+       
 
+class WeatherAPI(Resource):
     
+    def get(self):
+        pass
+
+    def post(self):
+        args = WeatherRequestParser.get_arguments(self)
+
+        weather_data = Weather()
+        
+        db.add(weather_data)   
+        db.commit()
+        return Response({}, 400)
+
+
+class WeatherEraseAPI(Resource):
+    
+    def get(self):
+        pass
+
+    def delete(self):
+        try:
+            num_rows_deleted = db.session.query(Weather).delete()
+            db.session.commit()
+        except:
+            db.session.rollback()
+        return Response({}, 200)
+
+
+class TemperatureAPI(Resource):
+    
+    def get(self):
+        pass
+
+
 class PreferredLocationsAPI(Resource):
     
     def get(self):
-        
-        
+        pass
+
 weatherapi.add_resource(WeatherAPI, '/weather')
 weatherapi.add_resource(WeatherEraseAPI, '/erase')
 weatherapi.add_resource(TemperatureAPI, '/weather/temperature')
